@@ -1,3 +1,55 @@
-h1 {
-    color: red;
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: lightblue;
+}
+
+.search-container {
+    margin-top: 0;
+    background-color: red;
+}
+
+.search-box {
+    width: 360px;
+    height: 55px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.search-box input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding-left: 40px;
+    font-size: 16px;
+}
+
+.search-box .icon-search,
+.search-box .icon-filter {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+}
+
+.search-box .icon-search {
+    left: 10px;
+}
+
+.search-box .icon-filter {
+    right: 10px;
+}
+
+.search-box input::placeholder {
+    color: #888;
 }
