@@ -105,3 +105,53 @@ func FetchRelationsData(url string) (*RelationApiResponse, error) {
 	}
 	return &apiResponse, nil
 }
+
+type CombinedArtistData struct {
+	Artist    Artist
+	Locations []string
+	Dates     []string
+}
+
+func FetchCombinedArtistData() ([]CombinedArtistData, error) {
+	artists, err := FetchArtistData()
+	if err != nil {
+		return nil, err
+	}
+
+	locations, err := FetchLocationData("https://groupietrackers.herokuapp.com/api/locations")
+	if err != nil {
+		return nil, err
+	}
+
+	dates, err := FetchDatesData("https://groupietrackers.herokuapp.com/api/dates")
+	if err != nil {
+		return nil, err
+	}
+
+	var combinedData []CombinedArtistData
+
+	for _, artist := range artists {
+		var artistLocations []string
+		var artistDates []string
+
+		for _, locationItem := range locations.Index {
+			if locationItem.ID == artist.ID {
+				artistLocations = locationItem.Locations
+			}
+		}
+
+		for _, dateItem := range dates.Index {
+			if dateItem.ID == artist.ID {
+				artistDates = dateItem.Dates
+			}
+		}
+
+		combinedData = append(combinedData, CombinedArtistData{
+			Artist:    artist,
+			Locations: artistLocations,
+			Dates:     artistDates,
+		})
+	}
+
+	return combinedData, nil
+}
