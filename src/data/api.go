@@ -2,6 +2,7 @@ package data
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -17,20 +18,32 @@ type Artist struct {
 	Relations    string   `json:"relations"`
 }
 
-type LocationIndex struct {
-	ID        int      `json:"id"`
-	Locations []string `json:"locations"`
-	Dates     string   `json:"dates"`
-}
-
-type DatesIndex struct {
-	ID    int      `json:"id"`
-	Dates []string `json:"dates"`
+type RelationApiResponse struct {
+	Index []Relations `json:"Index"`
 }
 
 type Relations struct {
 	ID             int                 `json:"id"`
 	DatesLocations map[string][]string `json:"datesLocations"`
+}
+
+type DatesApiResponse struct {
+	Index []Dates `json:"index"`
+}
+
+type Dates struct {
+	ID    int      `json:"id"`
+	Dates []string `json:"dates"`
+}
+
+type LocationAPIResponse struct {
+	Index []LocationItem `json:"index"`
+}
+
+type LocationItem struct {
+	ID        int      `json:"id"`
+	Locations []string `json:"locations"`
+	Dates     string   `json:"dates"`
 }
 
 func FetchArtistData() ([]Artist, error) {
@@ -49,53 +62,46 @@ func FetchArtistData() ([]Artist, error) {
 	return artists, nil
 }
 
-func FetchLocationIndexData() ([]LocationIndex, error) {
-	url := "https://groupietrackers.herokuapp.com/api/locations"
+func FetchLocationData(url string) (*LocationAPIResponse, error) {
 	resp, err := http.Get(url)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error fetching data: %v", err)
 	}
 	defer resp.Body.Close()
 
-	var locations []LocationIndex
-	err = json.NewDecoder(resp.Body).Decode(&locations)
-	if err != nil {
-		return nil, err
+	var apiResponse LocationAPIResponse
+	if err := json.NewDecoder(resp.Body).Decode(&apiResponse); err != nil {
+		return nil, fmt.Errorf("error decoding response: %v", err)
 	}
 
-	return locations, nil
+	return &apiResponse, nil
 }
 
-func FetchDatesIndexData() ([]DatesIndex, error) {
-	url := "https://groupietrackers.herokuapp.com/api/dates"
+func FetchDatesData(url string) (*DatesApiResponse, error) {
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
-	var dates []DatesIndex
-	err = json.NewDecoder(resp.Body).Decode(&dates)
-	if err != nil {
-		return nil, err
+	var apiResponse DatesApiResponse
+	if err := json.NewDecoder(resp.Body).Decode(&apiResponse); err != nil {
+		return nil, fmt.Errorf("error decoding response: %v", err)
 	}
 
-	return dates, nil
+	return &apiResponse, nil
 }
 
-func FetchRelationsData() (Relations, error) {
-	url := "https://groupietrackers.herokuapp.com/api/relation"
-	resp, err := http.Get(url)
+func FetchRelationsData(url string) (*RelationApiResponse, error) {
+	rsp, err := http.Get(url)
 	if err != nil {
-		return Relations{}, err
+		return nil, err
 	}
-	defer resp.Body.Close()
+	defer rsp.Body.Close()
 
-	var relations Relations
-	err = json.NewDecoder(resp.Body).Decode(&relations)
-	if err != nil {
-		return Relations{}, err
+	var apiResponse RelationApiResponse
+	if err := json.NewDecoder(rsp.Body).Decode(&apiResponse); err != nil {
+		return nil, fmt.Errorf("error decoding response: %v", err)
 	}
-
-	return relations, nil
+	return &apiResponse, nil
 }
