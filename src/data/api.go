@@ -13,13 +13,10 @@ type Artist struct {
 	Members      []string `json:"members"`
 	CreationDate int      `json:"creationDate"`
 	FirstAlbum   string   `json:"firstAlbum"`
-	Locations    string   `json:"locations"`
-	ConcertDates string   `json:"concertDates"`
-	Relations    string   `json:"relations"`
 }
 
 type RelationApiResponse struct {
-	Index []Relations `json:"Index"`
+	Index []Relations `json:"index"`
 }
 
 type Relations struct {
@@ -110,6 +107,7 @@ type CombinedArtistData struct {
 	Artist    Artist
 	Locations []string
 	Dates     []string
+	Relations map[string][]string
 }
 
 func FetchCombinedArtistData() ([]CombinedArtistData, error) {
@@ -128,11 +126,17 @@ func FetchCombinedArtistData() ([]CombinedArtistData, error) {
 		return nil, err
 	}
 
+	relations, err := FetchRelationsData("https://groupietrackers.herokuapp.com/api/relation")
+	if err != nil {
+		return nil, err
+	}
+
 	var combinedData []CombinedArtistData
 
 	for _, artist := range artists {
 		var artistLocations []string
 		var artistDates []string
+		var artistRelations map[string][]string
 
 		for _, locationItem := range locations.Index {
 			if locationItem.ID == artist.ID {
@@ -146,10 +150,17 @@ func FetchCombinedArtistData() ([]CombinedArtistData, error) {
 			}
 		}
 
+		for _, relationItem := range relations.Index {
+			if relationItem.ID == artist.ID {
+				artistRelations = relationItem.DatesLocations
+			}
+		}
+
 		combinedData = append(combinedData, CombinedArtistData{
 			Artist:    artist,
 			Locations: artistLocations,
 			Dates:     artistDates,
+			Relations: artistRelations,
 		})
 	}
 

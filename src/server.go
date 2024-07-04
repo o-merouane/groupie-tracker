@@ -12,9 +12,6 @@ func Server() {
 
 	http.HandleFunc("/", handlers.IndexHandler)
 	http.HandleFunc("/artists", handlers.ArtistsHandler)
-	http.HandleFunc("/locations", handlers.LocationsHandler)
-	http.HandleFunc("/dates", handlers.DatesHandler)
-	http.HandleFunc("/relations", handlers.RelationsHandler)
 
 	log.Println("Server started on: http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
