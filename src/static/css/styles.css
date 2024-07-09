@@ -105,6 +105,8 @@ body, html {
     border-radius: 30px;
     text-align: center;
     box-sizing: border-box;
+    transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .circle {
@@ -165,4 +167,40 @@ body, html {
 
 .error-button a:hover {
     background-color: #dd7f44;
+}
+
+.more-info {
+    display: none;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.square.expanded {
+    grid-column: span 5; /* Span across 5 columns */
+    width: 100%; /* Full width */
+    height: auto; /* Allow height to adjust based on content */
+}
+
+.square.expanded .more-info {
+    display: block;
+}
+
+.square.expanded.first .circle,
+.square.expanded.first .title {
+    display: none; /* Hide circle and title for the first expanded square */
+}
+
+.square.expanded .circle {
+    float: left; /* Float the circle to the left for non-first squares */
+    margin-right: 20px;
+}
+
+.square.expanded .title {
+    float: left; /* Float the title to the left for non-first squares */
+    margin-top: 30px; /* Align the title vertically */
+    margin-right: 20px;
+}
+
+.square.expanded .more-info {
+    margin-left: 140px; /* Adjust margin to account for floated elements */
 }
