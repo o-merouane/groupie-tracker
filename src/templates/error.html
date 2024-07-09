@@ -2,11 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{.Title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-    <h1>{{.Title}}</h1>
-    <p>{{.Error}}</p>
-    <a href="/">Go back to home</a>
+
+<div class="error-container">
+
+    
+    <div class="error-text">
+        <h1>Error 404</h1>
+        <p>{{.Error}}</p>
+    </div>
+
+    
+    <div class="error-illustration">
+        <img src="../static/images/error_illustration.png" alt="error-illustration">
+    </div>
+
+    <div class="error-button">
+        <a href="/">Go back to main page</a>
+    </div>
+
+</div>
+
 </body>
 </html>

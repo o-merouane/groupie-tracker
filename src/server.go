@@ -10,8 +10,7 @@ func Server() {
 	fs := http.FileServer(http.Dir("src/static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	http.HandleFunc("/", handlers.IndexHandler)
-	http.HandleFunc("/artists", handlers.ArtistsHandler)
+	http.HandleFunc("/", handlers.ArtistsHandler)
 	http.HandleFunc("/error", handlers.ErrorPage)
 
 	log.Println("Server started on: http://localhost:8080")

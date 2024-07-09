@@ -27,27 +27,18 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 	}
 }
 
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		ErrorHandler(w, r, http.StatusNotFound)
-		return
-	}
-	p := &Page{Title: "Groupie Tracker"}
-	RenderTemplate(w, "index.html", p)
-}
-
 func ArtistsHandler(w http.ResponseWriter, r *http.Request) {
 	artists, err := data.FetchCombinedArtistData()
 	if err != nil {
 		http.Error(w, "Failed to fetch artist data", http.StatusInternalServerError)
 		return
 	}
-	if r.URL.Path != "/artists" {
+	if r.URL.Path != "/" {
 		ErrorHandler(w, r, http.StatusNotFound)
 		return
 	}
-	p := &Page{Title: "Artists", Artists: artists}
-	RenderTemplate(w, "artists.html", p)
+	p := &Page{Title: "Groupie Tracker", Artists: artists}
+	RenderTemplate(w, "index.html", p)
 }
 
 func ErrorHandler(w http.ResponseWriter, r *http.Request, status int) {
