@@ -18,10 +18,9 @@
         </div>
 
         <div class="content-container">
-            <!-- Add your illustrations and text here -->
             <div class="text-content">
                 <h1>Groupie Tracker</h1>
-                <p>Your text goes here. You can add multiple paragraphs and other content as needed.</p>
+                <p>Track your favorite artist/band, their members, their creation date, their first album,<br> where you can meet them, when you can attend their concerts and more !</p>
             </div>
             <div class="illustration">
                 <img src="../static/images/illustration1.png" alt="illustration">
@@ -38,11 +37,11 @@
                 </div>
                 <div class="title">{{.Artist.Name}}</div>
                 <div class="more-info">
-                    <p>Members: John, Paul, George, Ringo</p>
-                    <p>Creation Date: 1960</p>
-                    <p>First Album: Please Please Me</p>
-                    <p>Locations of Concerts: London, New York, Tokyo</p>
-                    <p>Dates of Concerts: 1964, 1965, 1966</p>
+                    <p>Members:<br>{{range .Artist.Members}}<br>{{.}}, {{end}}</p>
+                    <p>Creation Date:<br><br>{{.Artist.CreationDate}}</p>
+                    <p>First Album:<br><br>{{.Artist.FirstAlbum}}</p>
+                    <p>Locations:<br>{{range .Locations}}<br>{{.}}, {{end}}</p>
+                    <p>Concert Dates:<br>{{range .Dates}}<br>{{.}}, {{end}}</p>
                 </div>
             </div>
             {{end}}
