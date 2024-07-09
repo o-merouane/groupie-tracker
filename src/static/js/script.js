@@ -1,24 +1,36 @@
+document.addEventListener('click', function(event) {
+    const expandedSquare = document.querySelector('.square.expanded');
+    if (expandedSquare && !expandedSquare.contains(event.target)) {
+        collapseAllSquares();
+    }
+});
+
 function expandSquare(element) {
     const isExpanded = element.classList.contains('expanded');
     
-    // Remove 'expanded' class from all squares
-    document.querySelectorAll('.square').forEach(square => {
-        square.classList.remove('expanded');
-        square.classList.remove('first');
-    });
+    collapseAllSquares();
 
     if (!isExpanded) {
         // Add 'expanded' class to the clicked square
         element.classList.add('expanded');
 
-        // Check if the square is the first in the row
+        // Hide other squares in the same row
         const gridContainer = document.querySelector('.grid-container');
         const squares = Array.from(gridContainer.children);
         const index = squares.indexOf(element);
-        const isFirst = index % 5 === 0;
+        const rowStart = Math.floor(index / 5) * 5;
 
-        if (isFirst) {
-            element.classList.add('first');
+        for (let i = rowStart; i < rowStart + 5; i++) {
+            if (squares[i] !== element) {
+                squares[i].classList.add('hidden');
+            }
         }
     }
+}
+
+function collapseAllSquares() {
+    document.querySelectorAll('.square').forEach(square => {
+        square.classList.remove('expanded');
+        square.classList.remove('hidden');
+    });
 }

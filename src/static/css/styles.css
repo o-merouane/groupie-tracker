@@ -105,7 +105,6 @@ body, html {
     border-radius: 30px;
     text-align: center;
     box-sizing: border-box;
-    transition: all 0.3s ease;
     overflow: hidden;
 }
 
@@ -203,4 +202,8 @@ body, html {
 
 .square.expanded .more-info {
     margin-left: 140px; /* Adjust margin to account for floated elements */
+}
+
+.hidden {
+    display: none; /* Hide elements */
 }
