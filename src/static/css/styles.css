@@ -1,4 +1,4 @@
-/*
+/* /*
 My Palette
 Beige : #EFECCA
 Cambridge Blue : #A9CBB7
@@ -17,24 +17,26 @@ body, html {
 }
 
 .search-container {
-    margin-top: 55px;
+    margin-top: 3vw;
     width: 100%;
     display: flex;
     justify-content: center;
-    
 }
 
 .search-box {
-    width: 360px;
-    height: 55px;
+    width: 18vw;
+    height: 3vw;
     position: relative;
-    display: none;
+    display: flex;
     align-items: center;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    padding: 0 10px;
+    border: 0 solid #ccc;
+    box-shadow: 0.1vw 0.1vw 0.1vw #5E565A;
+    border-radius: 0.5vw;
+    padding: 0 1vw;
     box-sizing: border-box;
     background-color: white;
+    margin-top: 1vw;
+    margin-bottom: 5vw;
 }
 
 .search-box input {
@@ -42,23 +44,23 @@ body, html {
     height: 100%;
     border: none;
     outline: none;
-    padding-left: 40px;
-    font-size: 16px;
+    padding-left: 2vw;
+    font-size: 1vw;
 }
 
 .search-box .icon-search,
 .search-box .icon-filter {
     position: absolute;
-    width: 24px;
-    height: 24px;
+    width: 1.5vw;
+    height: 1.5vw;
 }   
 
 .search-box .icon-search {
-    left: 10px;
+    left: 0.5vw;
 }
 
 .search-box .icon-filter {
-    right: 10px;
+    right: 0.5vw;
 }
 
 .search-box input::placeholder {
@@ -69,19 +71,26 @@ body, html {
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 50px 20px; /* Adjust padding as needed */
 }
 
 .text-content {
-    max-width: 60%;
+    max-width: 40%;
     text-align: left;
-    margin-left: 200px;
+    padding-left: 12vw;
     color: #5E565A;
+}
+
+.text-content h1 {
+    font-size: 4vw;
+}
+
+.text-content p {
+    font-size: 1.5vw;
 }
 
 .illustration {
     max-width: 30%;
-    margin-left: 300px;
+    margin-left: 18vw;
 }
 
 .illustration img {
@@ -93,18 +102,19 @@ body, html {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 50px;
-    gap: 50px; /* Space between squares */
-    max-width: 1500px; /* Adjust as needed */
+    padding: 5vw;
+    gap: 3vw; /* Space between squares */
+    max-width: auto; /* Adjust as needed */
     margin: 0 auto;
 }
 
 .square {
-    width: calc(20% - 50px); /* Adjust the 20px to change the gap */
-    padding: 50px;
+    width: calc(20% - 4vw); 
+    height: auto;
+    padding: 3vw;
     background-color: #FF934F;
-    border: 2px solid #d67b42;
-    border-radius: 30px;
+    border: 0.2vw solid #d67b42;
+    border-radius: 10%;
     text-align: center;
     box-sizing: border-box;
     overflow: hidden;
@@ -115,12 +125,12 @@ body, html {
 
 .square:hover {
     background-color: #d67b42; /* Lighten background on hover */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
+    box-shadow: 0 0 0.5vw rgba(0, 0, 0, 0.1); /* Add a slight shadow */
 }
 
 .circle {
-    width: 100px;
-    height: 100px;
+    width: 7vw;
+    height: 7vw;
     margin: 0 auto;
     border-radius: 50%;
     overflow: hidden;
@@ -133,8 +143,8 @@ body, html {
 }
 
 .title {
-    margin-top: 20px;
-    font-size: 16px;
+    margin-top: 2vw;
+    font-size: 1.2vw;
     font-weight: bold;
 }
 
@@ -181,23 +191,28 @@ body, html {
 
 .more-info {
     display: none;
-    margin-top: 10px;
+    margin-top: 1.5vw;
     text-align: left;
-    gap: 50px; /* Add space between the paragraphs */
-    padding: 50px;
+    gap: 4vw; /* Add space between the paragraphs */
+    padding: 4vw;
     overflow: hidden; /* Ensure contents do not overflow */
     flex-wrap: wrap; /* Allow paragraphs to wrap */
     color: #EFECCA;
     font-weight: bold;
-    font-size: large;
+    font-size: 1.1vw;
 }
 
 .more-info p {
     margin: 0; /* Remove default margin */
     flex: 1; /* Distribute space evenly */
-    width: 200px;
+    width: auto;
     height: auto;
+}
 
+.subtitle {
+    text-decoration: underline;
+    font-size: 1.2vw;
+    font-weight: bold;
 }
 
 
@@ -205,6 +220,7 @@ body, html {
     grid-column: span 5; /* Span across 5 columns */
     width: 100%; /* Full width */
     height: auto; /* Allow height to adjust based on content */
+    border-radius: 2vw;
 }
 
 .square.expanded .more-info {
@@ -216,21 +232,38 @@ body, html {
     display: none; /* Hide circle and title for the first expanded square */
 }
 
-.square.expanded .circle {
-    float: left; /* Float the circle to the left for non-first squares */
-    margin-right: 20px;
+.square.expanded .content {
+    display: flex;
 }
 
-.square.expanded .title {
-    float: left; /* Float the title to the left for non-first squares */
-    margin-top: 30px; /* Align the title vertically */
-    margin-left: 20px;
+.square.expanded .content .circle {
+    flex: 0 0 auto;
+    width: 50%;
+    height: auto;
+
+    /* float: left; /* Float the circle to the left for non-first squares 
+    margin-right: 0; */
+}
+
+.square.expanded .content .title {
+    flex: 1;
+    background-color: red;
+    padding: 5vw;
+
+    /* float: left; /* Float the title to the left for non-first squares 
+    margin-top: 0; /* Align the title vertically 
+    margin-left: 0; */
+    
 }
 
 .square.expanded .more-info {
-    margin-left: 140px; /* Adjust margin to account for floated elements */
+    margin-left: 3vw; /* Adjust margin to account for floated elements */
 }
 
 .hidden {
     display: none; /* Hide elements */
-}
+} 
+
+/* @media (max-width: 1200px) {
+
+} */

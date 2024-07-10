@@ -20,7 +20,7 @@
         <div class="content-container">
             <div class="text-content">
                 <h1>Groupie Tracker</h1>
-                <p>Track your favorite artist/band, their members, their creation date, their first album,<br> where you can meet them, when you can attend their concerts and more !</p>
+                <p>Track your favorite artist/band, their members, their creation date, their first album, where you can meet them, when you can attend their concerts and more !</p>
             </div>
             <div class="illustration">
                 <img src="../static/images/illustration1.png" alt="illustration">
@@ -32,16 +32,18 @@
             
             {{range .Artists}}
             <div class="square" onclick="expandSquare(this)">
-                <div class="circle">
-                    <img src="{{.Artist.Image}}" alt="{{.Artist.Name}}">
+                <div class="content">
+                    <div class="circle">
+                        <img src="{{.Artist.Image}}" alt="{{.Artist.Name}}">
+                    </div>
+                    <div class="title">{{.Artist.Name}}</div>
                 </div>
-                <div class="title">{{.Artist.Name}}</div>
                 <div class="more-info">
-                    <p>Members:<br>{{range .Artist.Members}}<br>{{.}}, {{end}}</p>
-                    <p>Creation Date:<br><br>{{.Artist.CreationDate}}</p>
-                    <p>First Album:<br><br>{{.Artist.FirstAlbum}}</p>
-                    <p>Locations:<br>{{range .Locations}}<br>{{.}}, {{end}}</p>
-                    <p>Concert Dates:<br>{{range .Dates}}<br>{{.}}, {{end}}</p>
+                    <p><span class="subtitle">Members:</span><br>{{range .Artist.Members}}<br>{{.}}, {{end}}</p>
+                    <p><span class="subtitle">Creation Date:</span><br><br>{{.Artist.CreationDate}}</p>
+                    <p><span class="subtitle">First Album:</span><br><br>{{.Artist.FirstAlbum}}</p>
+                    <p><span class="subtitle">Locations:</span><br>{{range .Locations}}<br>{{.}}, {{end}}</p>
+                    <p><span class="subtitle">Concert Dates:</span><br>{{range .Dates}}<br>{{.}}, {{end}}</p>
                 </div>
             </div>
             {{end}}
