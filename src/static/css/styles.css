@@ -27,7 +27,7 @@ body, html {
     width: 18vw;
     height: 3vw;
     position: relative;
-    display: flex;
+    display: none;
     align-items: center;
     border: 0 solid #ccc;
     box-shadow: 0.1vw 0.1vw 0.1vw #5E565A;
@@ -232,32 +232,21 @@ body, html {
     display: none; /* Hide circle and title for the first expanded square */
 }
 
-.square.expanded .content {
-    display: flex;
+.square.expanded .content-top {
+    text-align: center;
 }
 
-.square.expanded .content .circle {
-    flex: 0 0 auto;
-    width: 50%;
-    height: auto;
-
-    /* float: left; /* Float the circle to the left for non-first squares 
-    margin-right: 0; */
+.square.expanded .circle {
+    margin-top: 1vw;
 }
 
-.square.expanded .content .title {
-    flex: 1;
-    background-color: red;
-    padding: 5vw;
-
-    /* float: left; /* Float the title to the left for non-first squares 
-    margin-top: 0; /* Align the title vertically 
-    margin-left: 0; */
-    
+.square.expanded .title {  
+    margin-top: 2vw;
 }
 
 .square.expanded .more-info {
-    margin-left: 3vw; /* Adjust margin to account for floated elements */
+    margin-left: 3vw;
+    position: center;
 }
 
 .hidden {

@@ -43,8 +43,7 @@ type LocationItem struct {
 	Dates     string   `json:"dates"`
 }
 
-func FetchArtistData() ([]Artist, error) {
-	url := "https://groupietrackers.herokuapp.com/api/artists"
+func FetchArtistData(url string) ([]Artist, error) {
 	rsp, err := http.Get(url)
 	if err != nil {
 		return nil, err
@@ -111,7 +110,7 @@ type CombinedArtistData struct {
 }
 
 func FetchCombinedArtistData() ([]CombinedArtistData, error) {
-	artists, err := FetchArtistData()
+	artists, err := FetchArtistData("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
 		return nil, err
 	}
